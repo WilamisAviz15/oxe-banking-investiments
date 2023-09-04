@@ -24,8 +24,8 @@ object DBSetup {
     clients.schema.create,
     banks.schema.create,
     bankClients.schema.create,
-    accounts.schema.create,
     accountsType.schema.create,
+    accounts.schema.create,
   )
 
   def initializeDatabase(): Unit = {

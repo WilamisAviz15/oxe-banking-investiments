@@ -11,7 +11,7 @@ object Main {
         DBSetup.initializeDatabase()
         // connection.close()
       case None =>
-        println("Falha ao estabelecer conexão com o banco de dados.")
+        println("Falha ao estabelecer conexão com o banco de dados..")
     }
   }
 }

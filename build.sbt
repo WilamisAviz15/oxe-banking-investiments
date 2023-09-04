@@ -8,7 +8,15 @@ ThisBuild / organizationName := "example"
 lazy val root = (project in file("."))
   .settings(
     name := "oxe-banking-investiments",
-    libraryDependencies += munit % Test
-  )
+    libraryDependencies ++= Seq(
+  "mysql" % "mysql-connector-java" % "8.0.26",
+  "com.typesafe.slick" %% "slick" % "3.3.3",
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.3.3",
+  "ch.qos.logback" % "logback-classic" % "1.2.6",
+  "org.scalameta" %% "munit" % "0.7.29" % Test
+)
+)
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
+
+

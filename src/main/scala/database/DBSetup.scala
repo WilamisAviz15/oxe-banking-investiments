@@ -7,6 +7,7 @@ import scala.concurrent.duration._
 import model.ClientsTable
 import model.BanksTable
 import model.BankClientsTable
+import model.AccountsTable
 
 object DBSetup {
   implicit val ec: ExecutionContext = scala.concurrent.ExecutionContext.global
@@ -14,12 +15,14 @@ object DBSetup {
   val clients = TableQuery[ClientsTable]
   val banks = TableQuery[BanksTable]
   val bankClients = TableQuery[BankClientsTable]
+  val accounts = TableQuery[AccountsTable]
 
   // Define your tables and queries here
   val createTables = DBIO.seq(
     clients.schema.create,
     banks.schema.create,
     bankClients.schema.create,
+    accounts.schema.create,
   )
 
   def initializeDatabase(): Unit = {

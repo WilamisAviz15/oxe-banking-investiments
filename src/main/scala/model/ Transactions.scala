@@ -14,7 +14,6 @@ class TransactionsTable(tag: Tag) extends Table[Transactions](tag, "transactions
   
   def * = (id.?, hourDate, transactionsType, description, value, recipient) <> (Transactions.tupled, Transactions.unapply)
 
-   //def fkInvestmentType = foreignKey("fk_Investment_type_id", investmentType, TableQuery[InvestmentsTypeTable])(_.id)
- 
+   def fkITransactionsType = foreignKey("fk_Transactions_type_id", transactionsType, TableQuery[TransactionsTypeTable])(_.id)
 }
 

@@ -3,29 +3,25 @@ package main
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
+import akka.http.scaladsl.server.Route
 import scala.concurrent.ExecutionContextExecutor
 
+
 object MyServer extends App {
-  // Initialize the database
   database.DatabaseInitializer.initialize()
 
-  // Create an Actor System and Materializer
   implicit val system: ActorSystem = ActorSystem("my-server")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
   implicit val executionContext: ExecutionContextExecutor = system.dispatcher
 
-  // Your routes go here
-  val route = routes.MyRoutes.route
+  val myRoutes: Route = routes.MyRoutes.myRoutes
 
-  // Bind and start your server
-  val bindingFuture = Http().bindAndHandle(route, "localhost", 8080)
+  val bindingFuture = Http().bindAndHandle(myRoutes, "localhost", 8080)
 
   println(s"Server online at http://localhost:8080/")
 
-  // Keep the server running
   scala.io.StdIn.readLine("Press Enter to stop the server...\n")
 
-  // Gracefully shut down the server and Actor System when done
   bindingFuture
     .flatMap(_.unbind())
     .onComplete { _ =>

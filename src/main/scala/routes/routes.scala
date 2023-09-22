@@ -2,12 +2,19 @@ package routes
 
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
-
 object MyRoutes {
-  val route: Route = path("hello") {
-    get {
-      complete("Hello, world!")
+  val createInvestiment: Route = path("investiment") {
+    post {
+      complete("Criar investimento")
     }
   }
+
+  val getInvestiments: Route = path("investiment") {
+    get {
+      complete("Ver meus investimentos")
+    }
+  }
+
+  val myRoutes = createInvestiment ~ getInvestiments
 }
 

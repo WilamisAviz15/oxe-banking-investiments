@@ -43,10 +43,25 @@ object DBSetup {
     clientInvestiments.schema.create,
   )
 
+  val dropTables = DBIO.seq(
+    clientInvestiments.schema.dropIfExists,
+    transactions.schema.dropIfExists,
+    transactionsType.schema.dropIfExists,
+    investments.schema.dropIfExists,
+    investmentsType.schema.dropIfExists,
+    accounts.schema.dropIfExists,
+    accountsType.schema.dropIfExists,
+    bankClients.schema.dropIfExists,
+    banks.schema.dropIfExists,
+    clients.schema.dropIfExists
+  )
+
   def initializeDatabase(): Unit = {
-    val createTablesFuture = db.run(createTables)
+    // Drop tables first (if they exist), then create them
+    val dropAndCreateTables = dropTables andThen createTables
+    val dropAndCreateTablesFuture = db.run(dropAndCreateTables)
     try {
-      val result = Await.result(createTablesFuture, Duration.Inf)
+      val result = Await.result(dropAndCreateTablesFuture, Duration.Inf)
       result match {
         case _ =>
           println("Database tables created successfully.")

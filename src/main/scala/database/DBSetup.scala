@@ -13,6 +13,7 @@ import model.InvestmentTable
 import model.InvestmentsTypeTable
 import model.TransactionsTable
 import model.TransactionsTypeTable
+import model.ClientInvestimentsTable
 
 object DBSetup {
   implicit val ec: ExecutionContext = scala.concurrent.ExecutionContext.global
@@ -26,6 +27,7 @@ object DBSetup {
   val investmentsType = TableQuery[InvestmentsTypeTable]
   val transactionsType = TableQuery[TransactionsTypeTable]
   val transactions = TableQuery[TransactionsTable]
+  val clientInvestiments = TableQuery[ClientInvestimentsTable]
 
   // Define your tables and queries here
   val createTables = DBIO.seq(
@@ -38,6 +40,7 @@ object DBSetup {
     investments.schema.create,
     transactionsType.schema.create,
     transactions.schema.create,
+    clientInvestiments.schema.create,
   )
 
   def initializeDatabase(): Unit = {

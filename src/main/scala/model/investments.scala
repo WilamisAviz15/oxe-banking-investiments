@@ -1,14 +1,16 @@
 package model
 import slick.jdbc.MySQLProfile.api._
+import java.sql.Date
 
-case class Investment(id: Option[Int], investmentAmount: String, startDate: String, dueDate: String, interestRate: Int, investmentType: Int)
+
+case class Investment(id: Option[Int], investmentAmount: Double, startDate: Date, dueDate: Date, interestRate: Double, investmentType: Int)
 
 class InvestmentTable(tag: Tag) extends Table[Investment](tag, "investments") {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
-  def investmentAmount = column[String]("investment_amount")
-  def startDate = column[String]("start_date") 
-  def dueDate = column[String]("due_date")
-  def interestRate = column[Int]("interest_rate")
+  def investmentAmount = column[Double]("investment_amount")
+  def startDate = column[Date]("start_date") 
+  def dueDate = column[Date]("due_date")
+  def interestRate = column[Double]("interest_rate")
   def investmentType = column[Int]("investments_type")
  
   

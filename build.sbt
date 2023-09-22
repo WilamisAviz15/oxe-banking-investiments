@@ -16,6 +16,8 @@ lazy val root = (project in file("."))
   "com.typesafe.akka" %% "akka-http" % "10.2.6",
   "com.typesafe.akka" %% "akka-stream" % "2.6.16",
   "com.typesafe.play" %% "play-json" % "2.9.0",
+  "com.typesafe.akka" %% "akka-http-spray-json" % "10.2.7",
+  "io.spray" %% "spray-json" % "1.3.6",
   "org.scalameta" %% "munit" % "0.7.29" % Test
 )
 )

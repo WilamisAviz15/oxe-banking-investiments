@@ -6,10 +6,8 @@ import akka.stream.ActorMaterializer
 import akka.http.scaladsl.server.Route
 import scala.concurrent.ExecutionContextExecutor
 
-
 object MyServer extends App {
   database.DatabaseInitializer.initialize()
-
   implicit val system: ActorSystem = ActorSystem("my-server")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
   implicit val executionContext: ExecutionContextExecutor = system.dispatcher

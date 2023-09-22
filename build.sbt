@@ -15,10 +15,8 @@ lazy val root = (project in file("."))
   "ch.qos.logback" % "logback-classic" % "1.2.6",
   "com.typesafe.akka" %% "akka-http" % "10.2.6",
   "com.typesafe.akka" %% "akka-stream" % "2.6.16",
+  "com.typesafe.play" %% "play-json" % "2.9.0",
   "org.scalameta" %% "munit" % "0.7.29" % Test
 )
 )
-
-// See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
-
 

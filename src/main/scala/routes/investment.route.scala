@@ -10,17 +10,19 @@ import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
 import controller.InvestmentController
 import model.Investment
 import utils.DateJsonProtocol._
+import akka.http.scaladsl.marshalling.ToEntityMarshaller
+import akka.http.scaladsl.marshalling.Marshaller
 
 trait MyJSON extends SprayJsonSupport with DefaultJsonProtocol with NullOptions {
-  implicit val investmentJsonFormat: RootJsonFormat[Investment] = jsonFormat6((id, investmentAmount, startDate, dueDate, interestRate, investmentType) => Investment(id, investmentAmount, startDate, dueDate, interestRate, investmentType))
+  implicit val investmentJsonFormat: RootJsonFormat[Investment] = jsonFormat4((id, investmentAmount, period, investmentType) => Investment(id, investmentAmount, period, investmentType))
 }
 
-object RouteInvestments extends MyJSON{
-   private val simulate: Route = path("investment"/"simulation") {
+object RouteInvestments extends MyJSON {
+  private val simulate: Route = path("investment"/"simulation") {
     post {
       entity(as[Investment]) { req =>
-      val result = InvestmentController.simulate(req.investmentType, req.investmentAmount, req.startDate, req.dueDate)
-      complete(StatusCodes.OK, s"Simulation result: $result")
+      val result = InvestmentController.getSimulate(req.investmentType, req.investmentAmount, req.period)
+      complete(StatusCodes.OK, s"$result")
       }
     }
   }

@@ -6,9 +6,9 @@ import model.AccountType
 object DatabaseSeeder{
   // Seed data
   val seedInvestmentType = Seq(
-    InvestmentType(None, "Tesouro Direto"),
     InvestmentType(None, "Poupança"),
     InvestmentType(None, "CDB"),
+    InvestmentType(None, "LCI"),
   )
 
   val seedBank = Seq(

@@ -27,7 +27,7 @@ object BankController {
 
             banksArray = banksArray :+ bankJson
           }
-
+          
           Some(Json.prettyPrint(banksArray))
 
         } catch {

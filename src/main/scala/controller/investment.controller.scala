@@ -5,7 +5,6 @@ import database.DBConnection
 import play.api.libs.json._
 import java.sql.Date
 
-
 object InvestmentController {
   def getInvestmentById(id: Int): Option[String] = {
     DBConnection.getConnection match {
@@ -55,12 +54,20 @@ object InvestmentController {
     }
   }
 
-  def switch(selectedInvestment: String): Double = selectedInvestment match {
-    case "Tesouro Direto" => 1.10
-    case _ => 0.0
+  def switch(selectedInvestment: String, amount: Double, period: Int): JsObject = selectedInvestment match {
+    case "Poupança" => 
+      val earnings = ((0.005 * amount) * period)
+      Json.obj("investmentType" -> selectedInvestment, "earnings" -> earnings)
+    case "CDB" =>  
+      val earnings = (amount * (1.1 * 0.069) * (period / 12))
+      Json.obj("investmentType" -> selectedInvestment, "earnings" -> earnings)
+    case "LCI" =>  
+      val earnings = (amount * (0.07  * (period / 12)))
+      Json.obj("investmentType" -> selectedInvestment, "earnings" -> earnings)
+    case _ => Json.obj("investmentType" -> selectedInvestment, "earnings" -> 0.0)
   }
 
-  def simulate(investment_type: Int, amount: Double, startAt: Date, finishAt: Date): Double = {
+  def getSimulate(investment_type: Int, amount: Double,period: Int): JsObject   = {
     var selectedInvestment = ""
     DBConnection.getConnection match {
       case Some(connection) =>
@@ -89,8 +96,6 @@ object InvestmentController {
         None
     }
 
-    val value = switch(selectedInvestment) 
-
-    return value * amount
+     switch(selectedInvestment, amount, period) 
   }
 }

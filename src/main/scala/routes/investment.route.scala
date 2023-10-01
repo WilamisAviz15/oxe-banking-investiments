@@ -6,6 +6,8 @@ import spray.json._
 import spray.json.RootJsonFormat
 import spray.json.DefaultJsonProtocol._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
+import akka.http.scaladsl.model.HttpEntity
+import akka.http.scaladsl.model.ContentTypes
 
 import controller.InvestmentController
 import model.Investment
@@ -22,7 +24,8 @@ object RouteInvestments extends MyJSON {
     post {
       entity(as[Investment]) { req =>
       val result = InvestmentController.getSimulate(req.investmentType, req.investmentAmount, req.period)
-      complete(StatusCodes.OK, s"$result")
+      val jsonResponse = HttpEntity(ContentTypes.`application/json`, s"$result")
+      complete(StatusCodes.OK, jsonResponse)
       }
     }
   }

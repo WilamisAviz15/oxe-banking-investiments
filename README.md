@@ -25,7 +25,8 @@ sbt run
 
  ## Simular Investimentos
 
-| Método | URL                                               |             Descrição                    |     Paramêtros       |   
+| Método | URL                                               |             Descrição                    |     Paramêtros       |
+|--------|---------------------------------------------------|------------------------------------------|----------------------|
 | POST   | http://localhost:8080/investment/simulation       | Simular investimento                     |       Abaixo         |
 
 ### Paramêtros:

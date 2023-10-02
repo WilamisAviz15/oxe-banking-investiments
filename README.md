@@ -30,9 +30,9 @@ sbt run
 | POST   | http://localhost:8080/investment/simulation       | Simular investimento                     |       Abaixo         |
 
 ### Paramêtros:
-#### investmentAmount - Valor a investir
-#### period - Tempo em meses
-#### investmentType - Tipo de investimento (ID entre 1 a 3 conforme mostrado acima em investimentos)
+#### investmentAmount - Valor a investir (tipo double)
+#### period - Tempo em meses (tipo int)
+#### investmentType - Tipo de investimento (Tipo int. ID entre 1 a 3 conforme mostrado acima em investimentos)
 
 Enviar para o endpoint um objeto como este:
 {
@@ -42,7 +42,15 @@ Enviar para o endpoint um objeto como este:
 }
 
 #### Retorno (um objeto):
-| investmentType                  | earnings              |         
-|----------------                 |-----------------------|
-| Tipo de investimento escolhido  | Valor de ganho obtido | 
+| investmentType                  | earnings              |  initial amount      | períod         |           
+|---------------------------------|-----------------------|----------------------|----------------|
+| Tipo de investimento escolhido  | Valor de ganho obtido | Valor investido      | Tempo em meses |
+
+Retorna um objeto como este:
+{
+    "investmentType": "Poupança",
+    "earnings": "60.00",
+    "initial amount": "1000.00",
+    "period": 12
+}
 

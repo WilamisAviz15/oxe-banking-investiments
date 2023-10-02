@@ -56,14 +56,20 @@ object InvestmentController {
 
   def switch(selectedInvestment: String, amount: Double, period: Int): JsObject = selectedInvestment match {
     case "Poupança" => 
-      val earnings = ((0.005 * amount) * period)
-      Json.obj("investmentType" -> selectedInvestment, "earnings" -> earnings)
+      val earnings: Double = ((0.005 * amount) * period)
+      val earningsFormattedValue = f"${earnings}%.2f"
+      val amountFormattedValue = f"${amount}%.2f"
+      Json.obj("investmentType" -> selectedInvestment, "earnings" -> earningsFormattedValue, "initial amount" -> amountFormattedValue, "period" -> period)
     case "CDB" =>  
       val earnings = (amount * (1.1 * 0.069) * (period / 12))
-      Json.obj("investmentType" -> selectedInvestment, "earnings" -> earnings)
+      val earningsFormattedValue = f"${earnings}%.2f"
+      val amountFormattedValue = f"${amount}%.2f"
+      Json.obj("investmentType" -> selectedInvestment, "earnings" -> earningsFormattedValue, "initial amount" -> amountFormattedValue, "period" -> period)
     case "LCI" =>  
       val earnings = (amount * (0.07  * (period / 12)))
-      Json.obj("investmentType" -> selectedInvestment, "earnings" -> earnings)
+      val earningsFormattedValue = f"${earnings}%.2f"
+      val amountFormattedValue = f"${amount}%.2f"
+      Json.obj("investmentType" -> selectedInvestment, "earnings" -> earningsFormattedValue, "initial amount" -> amountFormattedValue, "period" -> period)
     case _ => Json.obj("investmentType" -> selectedInvestment, "earnings" -> 0.0)
   }
 
